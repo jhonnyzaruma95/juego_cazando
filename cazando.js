@@ -1,10 +1,9 @@
 let canvas=document.getElementById("areaJuego");
 ctx=canvas.getContext("2d");
 
-let gatoX=230;
-let gatoY=200;
-let comidaX=canvas.width-80/2;
-let comidaY=canvas.height-80/2;
+
+let gatoX,gatoY;
+let comidaX,comidaY;
 
 const ALTO_GATO=100;
 const ANCHO_GATO=50;
@@ -13,6 +12,12 @@ const ANCHO_COMIDA=40;
 
 
 function iniciarJuego(){
+    canvas.width=500;
+    canvas.height=500;
+    gatoX=(canvas.width-ANCHO_GATO)/2;
+    gatoY=(canvas.height-ALTO_GATO)/2;
+    comidaX=canvas.width-ANCHO_COMIDA;
+    comidaY=canvas.height-ALTO_COMIDA;
     graficarGato();
     graficarComida();
 
@@ -32,3 +37,13 @@ function graficarRectangulo(x,y,ancho,alto,color){
 
 }
 
+function limpiarCanvas(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
+function moverIzquierda(){
+    gatoX=gatoX-10;
+    limpiarCanvas();
+    graficarGato();
+    graficarComida();
+}
