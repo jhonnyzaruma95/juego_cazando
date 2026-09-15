@@ -1,10 +1,11 @@
 let canvas=document.getElementById("areaJuego");
 ctx=canvas.getContext("2d");
 
-
+//Variables de posicion se van a mover
 let gatoX,gatoY;
 let comidaX,comidaY;
 
+//Constantes de tamano nunca cambian 
 const ALTO_GATO=100;
 const ANCHO_GATO=50;
 const ALTO_COMIDA=40;
@@ -14,10 +15,10 @@ const ANCHO_COMIDA=40;
 function iniciarJuego(){
     canvas.width=500;
     canvas.height=500;
-    gatoX=(canvas.width-ANCHO_GATO)/2;
-    gatoY=(canvas.height-ALTO_GATO)/2;
-    comidaX=canvas.width-ANCHO_COMIDA;
-    comidaY=canvas.height-ALTO_COMIDA;
+    gatoX=(canvas.width-ANCHO_GATO)/2;  //500-50/2=225
+    gatoY=(canvas.height-ALTO_GATO)/2;  //500-100/2=200
+    comidaX=canvas.width-ANCHO_COMIDA;  //500-40=460
+    comidaY=canvas.height-ALTO_COMIDA;  //500-40=460
     graficarGato();
     graficarComida();
 
@@ -42,10 +43,11 @@ function limpiarCanvas(){
 }
 
 function moverIzquierda(){
-    gatoX=gatoX-10;
-    limpiarCanvas();
-    graficarGato();
-    graficarComida();
+    gatoX=gatoX-10;               //restar 10 a gatoX
+    limpiarCanvas();              //limpiar todo
+    graficarGato();               //dibujar gato
+    graficarComida();             //dibujar comida-se borra al limpiar
+    detectarColision();           //llama cuando se mueva
 }
 
 function moverDerecha(){
@@ -53,18 +55,32 @@ function moverDerecha(){
     limpiarCanvas();
     graficarGato();
     graficarComida();
+    detectarColision();
 }
 
 function moverArriba(){
-    gatoY=gatoY-10;
+    gatoY=gatoY-10;                //en Y restar es subir
     limpiarCanvas();
     graficarGato();
     graficarComida();
+    detectarColision();
 }
 
 function moverAbajo(){
-    gatoY=gatoY+10;
+    gatoY=gatoY+10;                //en Y sumar es bajar
     limpiarCanvas();
     graficarGato();
     graficarComida();
+    detectarColision();
+}
+
+function detectarColision(){
+    if (gatoX < comidaX + ANCHO_COMIDA &&
+        gatoX + ANCHO_GATO > comidaX &&
+        gatoY < comidaY + ALTO_COMIDA &&
+        gatoY + ALTO_GATO > comidaY){
+
+        alert("!!EL GATO COMIO!!");
+        }
+
 }
