@@ -4,6 +4,7 @@ ctx=canvas.getContext("2d");
 //Variables de posicion se van a mover
 let gatoX,gatoY;
 let comidaX,comidaY;
+let puntos=0;
 
 //Constantes de tamano nunca cambian 
 const ALTO_GATO=100;
@@ -11,6 +12,12 @@ const ANCHO_GATO=50;
 const ALTO_COMIDA=40;
 const ANCHO_COMIDA=40;
 
+
+function actualizarJuego(){
+    limpiarCanvas();
+    graficarGato();
+    graficarComida();
+}
 
 function iniciarJuego(){
     canvas.width=500;
@@ -21,6 +28,7 @@ function iniciarJuego(){
     comidaY=canvas.height-ALTO_COMIDA;  //500-40=460
     graficarGato();
     graficarComida();
+    aparecerComida();
 
 }
 
@@ -79,8 +87,20 @@ function detectarColision(){
         gatoX + ANCHO_GATO > comidaX &&
         gatoY < comidaY + ALTO_COMIDA &&
         gatoY + ALTO_GATO > comidaY){
-
-        alert("!!EL GATO COMIO!!");
+        //alert("!!EL GATO COMIO!!");
+        
+        puntos=puntos + 1;
+        let componente=document.getElementById("puntos");
+        componente.textContent=puntos;
+        aparecerComida();
         }
 
 }
+
+
+function aparecerComida(){
+    comidaY=generarAleatorio(0,canvas.width-ANCHO_COMIDA);
+    comidaX=0;
+    actualizarJuego();
+}
+
