@@ -8,6 +8,19 @@ let puntos=0;
 let tiempo=10;
 let idTemporizador;
 let idJuego;
+let gameLoop=setInterval(()=>{
+    tiempo--;
+    mostrarEnSpan("tiempo",tiempo);
+if(puntos >= 6){
+        clearInterval(gameLoop);
+        alert("!!GANADOR!!");   
+    }
+else if(tiempo <= 0){
+        clearInterval(gameLoop);
+        alert("!!GAME OVER!!"); 
+    }
+},1000);
+        
 //Constantes de tamano nunca cambian 
 const ALTO_GATO=100;
 const ANCHO_GATO=50;
@@ -29,9 +42,7 @@ function iniciarJuego(){
     aparecerComida();
 
     idJuego=setInterval(actualizarJuego,1000/60);
-   
-    idTemporizador=setInterval(restarTiempo,1000);
-    
+
 
 }
 
@@ -93,11 +104,9 @@ function detectarColision(){
         //alert("!!EL GATO COMIO!!");
         
         puntos=puntos + 1;
-        let componente=document.getElementById("puntos");
-        componente.textContent=puntos;
+        mostrarEnSpan("puntos",puntos);
         aparecerComida();
-        }
-
+}
 }
 
 
@@ -107,14 +116,26 @@ function aparecerComida(){
     actualizarJuego();
 }
 
-function restarTiempo(){
-    tiempo=tiempo-1;
+function reiniciar(){
+    clearInterval(gameLoop);
+    puntos=0;
+    tiempo=10;
+    mostrarEnSpan("puntos",puntos);
     mostrarEnSpan("tiempo",tiempo);
-    if(tiempo <= 0){
-        clearInterval(idTemporizador);
-        clearInterval(idJuego);
-        alert("!se acabo el tiempo! puntos finales:" +puntos);
-
+    
+    gameLoop=setInterval(()=>{
+    tiempo--;
+    mostrarEnSpan("tiempo",tiempo);
+if(puntos >= 6){
+        clearInterval(gameLoop);
+        alert("!!GANADOR!!");   
     }
+else if(tiempo <= 0){
+        clearInterval(gameLoop);
+        alert("!!GAME OVER!!"); 
+    }
+},1000);
+        
+    
 
 }
