@@ -5,7 +5,9 @@ ctx=canvas.getContext("2d");
 let gatoX,gatoY;
 let comidaX,comidaY;
 let puntos=0;
-
+let tiempo=10;
+let idTemporizador;
+let idJuego;
 //Constantes de tamano nunca cambian 
 const ALTO_GATO=100;
 const ANCHO_GATO=50;
@@ -24,11 +26,12 @@ function iniciarJuego(){
     canvas.height=500;
     gatoX=(canvas.width-ANCHO_GATO)/2;  //500-50/2=225
     gatoY=(canvas.height-ALTO_GATO)/2;  //500-100/2=200
-    comidaX=canvas.width-ANCHO_COMIDA;  //500-40=460
-    comidaY=canvas.height-ALTO_COMIDA;  //500-40=460
-    graficarGato();
-    graficarComida();
     aparecerComida();
+
+    idJuego=setInterval(actualizarJuego,1000/60);
+   
+    idTemporizador=setInterval(restarTiempo,1000);
+    
 
 }
 
@@ -104,3 +107,14 @@ function aparecerComida(){
     actualizarJuego();
 }
 
+function restarTiempo(){
+    tiempo=tiempo-1;
+    mostrarEnSpan("tiempo",tiempo);
+    if(tiempo <= 0){
+        clearInterval(idTemporizador);
+        clearInterval(idJuego);
+        alert("!se acabo el tiempo! puntos finales:" +puntos);
+
+    }
+
+}
