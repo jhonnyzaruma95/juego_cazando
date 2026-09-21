@@ -1,42 +1,1260 @@
-body {
-  text-align: center;
-  font-family: Arial, sans-serif;
-  background: #f0f0f0;
-  margin: 0;
-  padding: 20px;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    --cyan: #00eaff;
+    --blue: #1677ff;
+    --purple: #7b2cff;
+    --pink: #ff19c8;
+    --orange: #ff7b00;
+
+    --dark: #03040a;
+    --dark-panel: rgba(5, 9, 20, 0.92);
+
+    --white: #ffffff;
+    --gray: #8e9bb7;
+
 }
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family: 'Rajdhani', sans-serif;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            rgba(2, 3, 10, 0.75),
+            rgba(2, 3, 10, 0.90)
+        ),
+
+        url("fondo.gato.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-attachment: fixed;
+
+    overflow-x: hidden;
+
+}
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.background-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            transparent 20%,
+            rgba(0, 0, 0, 0.65) 100%
+        );
+
+}
+
+
+/* =====================================================
+   GRID FUTURISTA
+===================================================== */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    opacity: 0.18;
+
+    background-image:
+
+        linear-gradient(
+            rgba(0, 234, 255, 0.18) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0, 234, 255, 0.18) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    mask-image:
+
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
+
+}
+
+
+/* =====================================================
+   CONTENEDOR
+===================================================== */
+
+.game-wrapper {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(1400px, 96%);
+
+    margin: auto;
+
+    padding: 35px 0;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.game-header {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+.game-badge {
+
+    display: inline-block;
+
+    padding: 8px 18px;
+
+    border: 1px solid var(--cyan);
+
+    border-radius: 30px;
+
+    color: var(--cyan);
+
+    background: rgba(0, 234, 255, 0.08);
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    box-shadow:
+
+        0 0 15px rgba(0, 234, 255, 0.3);
+
+}
+
 
 h1 {
-  margin-bottom: 5px;
+
+    margin-top: 12px;
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: clamp(40px, 7vw, 85px);
+
+    font-weight: 900;
+
+    line-height: 0.9;
+
+    letter-spacing: 4px;
+
+    color: white;
+
+    text-shadow:
+
+        0 0 10px var(--cyan),
+
+        0 0 25px rgba(0, 234, 255, 0.4);
+
 }
 
-.panel {
-  margin: 15px 0;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+
+h1 span {
+
+    display: block;
+
+    color: var(--pink);
+
+    text-shadow:
+
+        0 0 10px var(--pink),
+
+        0 0 35px rgba(255, 25, 200, 0.6);
+
 }
+
+
+.subtitle {
+
+    margin-top: 16px;
+
+    color: #c9d2e8;
+
+    font-size: 20px;
+
+}
+
+
+.author {
+
+    margin-top: 7px;
+
+    color: var(--gray);
+
+    letter-spacing: 2px;
+
+}
+
+
+.author strong {
+
+    color: white;
+
+}
+
+
+/* =====================================================
+   INTERFAZ PRINCIPAL
+===================================================== */
+
+.game-interface {
+
+    display: grid;
+
+    grid-template-columns:
+        220px
+        minmax(400px, 1fr)
+        220px;
+
+    gap: 20px;
+
+    align-items: center;
+
+}
+
+
+/* =====================================================
+   PANELES
+===================================================== */
+
+.left-panel,
+.right-panel {
+
+    padding: 18px;
+
+    border: 1px solid rgba(0, 234, 255, 0.35);
+
+    border-radius: 20px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(10, 17, 36, 0.96),
+            rgba(3, 6, 15, 0.95)
+        );
+
+    box-shadow:
+
+        0 0 25px rgba(0, 0, 0, 0.7),
+
+        inset 0 0 25px
+        rgba(0, 234, 255, 0.04);
+
+}
+
+
+/* =====================================================
+   HUD
+===================================================== */
+
+.hud-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+
+    padding: 15px;
+
+    border-radius: 14px;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+}
+
+
+.hud-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    font-size: 25px;
+
+    background: rgba(0, 234, 255, 0.08);
+
+    box-shadow:
+
+        0 0 15px rgba(0, 234, 255, 0.2);
+
+}
+
+
+.hud-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+}
+
+
+.hud-info span {
+
+    color: var(--gray);
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.hud-info strong {
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 30px;
+
+    color: var(--cyan);
+
+    text-shadow:
+
+        0 0 12px var(--cyan);
+
+}
+
+
+.time-box .hud-info strong {
+
+    color: var(--pink);
+
+    text-shadow:
+
+        0 0 12px var(--pink);
+
+}
+
+
+/* =====================================================
+   TARJETA DEL GATO
+===================================================== */
+
+.cat-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 190px;
+
+    margin-top: 18px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(255, 25, 200, 0.4);
+
+    background: #02030a;
+
+}
+
+
+.cat-image {
+
+    width: 100%;
+
+    height: 190px;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    display: block;
+
+    opacity: 0.85;
+
+    transition: transform 0.5s ease;
+
+}
+
+
+.cat-card:hover .cat-image {
+
+    transform: scale(1.08);
+
+}
+
+
+.cat-message {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    right: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px;
+
+    background:
+
+        linear-gradient(
+            transparent,
+            rgba(0, 0, 0, 0.95)
+        );
+
+}
+
+
+.cat-message span {
+
+    font-size: 22px;
+
+}
+
+
+.cat-message p {
+
+    text-align: left;
+
+    font-weight: 700;
+
+    color: white;
+
+}
+
+
+/* =====================================================
+   ÁREA DEL JUEGO
+===================================================== */
+
+.game-area {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+}
+
+
+.game-title {
+
+    margin-bottom: 10px;
+
+    color: var(--cyan);
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    text-shadow:
+
+        0 0 10px var(--cyan);
+
+}
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+.canvas-container {
+
+    position: relative;
+
+    width: min(500px, 100%);
+
+    padding: 7px;
+
+    border-radius: 22px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            var(--cyan),
+            var(--purple),
+            var(--pink),
+            var(--orange)
+        );
+
+    box-shadow:
+
+        0 0 20px rgba(0, 234, 255, 0.5),
+
+        0 0 45px rgba(255, 25, 200, 0.25);
+
+}
+
 
 canvas {
-  background: white;
-  border: 2px solid black;
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    border-radius: 16px;
+
+    background:
+
+        linear-gradient(
+            rgba(0, 0, 0, 0.1),
+            rgba(0, 0, 0, 0.1)
+        ),
+
+        url("fondo.gato.jpg");
+
+    background-size: cover;
+
+    background-position: center;
+
 }
 
-.controles {
-  margin-top: 20px;
+
+/* =====================================================
+   ESQUINAS TECNOLÓGICAS
+===================================================== */
+
+.corner {
+
+    position: absolute;
+
+    width: 25px;
+
+    height: 25px;
+
+    z-index: 5;
+
+    border-color: white;
+
 }
 
-button {
-  margin: 5px;
-  padding: 10px 16px;
-  font-size: 18px;
-  cursor: pointer;
+
+.corner-tl {
+
+    top: -2px;
+
+    left: -2px;
+
+    border-top: 3px solid;
+
+    border-left: 3px solid;
+
 }
+
+
+.corner-tr {
+
+    top: -2px;
+
+    right: -2px;
+
+    border-top: 3px solid;
+
+    border-right: 3px solid;
+
+}
+
+
+.corner-bl {
+
+    bottom: -2px;
+
+    left: -2px;
+
+    border-bottom: 3px solid;
+
+    border-left: 3px solid;
+
+}
+
+
+.corner-br {
+
+    bottom: -2px;
+
+    right: -2px;
+
+    border-bottom: 3px solid;
+
+    border-right: 3px solid;
+
+}
+
+
+/* =====================================================
+   EFECTO SCAN
+===================================================== */
+
+.scan-line {
+
+    position: absolute;
+
+    left: 7px;
+
+    right: 7px;
+
+    height: 2px;
+
+    top: 10%;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    background: rgba(0, 234, 255, 0.35);
+
+    box-shadow:
+
+        0 0 12px var(--cyan);
+
+    animation: scan 4s linear infinite;
+
+}
+
+
+@keyframes scan {
+
+    0% {
+        top: 8%;
+    }
+
+    50% {
+        top: 90%;
+    }
+
+    100% {
+        top: 8%;
+    }
+
+}
+
+
+/* =====================================================
+   GATO DECORATIVO
+===================================================== */
+
+.cat-character {
+
+    position: absolute;
+
+    right: -45px;
+
+    bottom: -30px;
+
+    width: 130px;
+
+    height: 130px;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    border: 3px solid var(--cyan);
+
+    box-shadow:
+
+        0 0 20px var(--cyan);
+
+    z-index: 10;
+
+    background: black;
+
+}
+
+
+.cat-character img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+/* =====================================================
+   MENSAJE
+===================================================== */
+
+.game-message {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    width: min(500px, 100%);
+
+    margin-top: 14px;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    border: 1px solid var(--cyan);
+
+    background: rgba(0, 15, 30, 0.9);
+
+    box-shadow:
+
+        0 0 15px rgba(0, 234, 255, 0.2);
+
+}
+
+
+.game-message span {
+
+    color: var(--cyan);
+
+    font-size: 20px;
+
+}
+
 
 #mensaje {
-  font-size: 20px;
-  font-weight: bold;
-  color: darkred;
-  margin-top: 15px;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   CONTROLES
+===================================================== */
+
+.controls-header {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+
+.controls-header span {
+
+    font-size: 20px;
+
+}
+
+
+.controls-header h2 {
+
+    color: var(--cyan);
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 16px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.controls-description {
+
+    margin: 10px 0 18px;
+
+    color: var(--gray);
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   GAMEPAD REALISTA
+===================================================== */
+
+.gamepad {
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 58px);
+
+    grid-template-rows: repeat(3, 58px);
+
+    justify-content: center;
+
+    gap: 7px;
+
+    margin: 10px auto 20px;
+
+}
+
+
+.control {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 58px;
+
+    height: 58px;
+
+    padding: 0;
+
+    border-radius: 15px;
+
+    border: 2px solid #267eff;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            #17243d,
+            #060b18
+        );
+
+    font-size: 23px;
+
+    box-shadow:
+
+        inset 0 0 10px rgba(0, 234, 255, 0.15),
+
+        0 5px 12px rgba(0, 0, 0, 0.6);
+
+    transition: all 0.15s ease;
+
+}
+
+
+.control:hover {
+
+    transform: translateY(-2px);
+
+    color: var(--cyan);
+
+    border-color: var(--cyan);
+
+    box-shadow:
+
+        0 0 20px rgba(0, 234, 255, 0.5);
+
+}
+
+
+.control:active {
+
+    transform: scale(0.9);
+
+    background: #0b3150;
+
+}
+
+
+.up {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+
+.left {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+
+.center {
+
+    grid-column: 2;
+    grid-row: 2;
+
+    border-color: var(--pink);
+
+    color: var(--pink);
+
+}
+
+
+.right {
+
+    grid-column: 3;
+    grid-row: 2;
+
+}
+
+
+.down {
+
+    grid-column: 2;
+    grid-row: 3;
+
+}
+
+
+/* =====================================================
+   TECLADO
+===================================================== */
+
+.keyboard-help {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+
+}
+
+
+.keyboard-help span {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--gray);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+}
+
+
+.keys {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 5px;
+
+}
+
+
+kbd {
+
+    min-width: 32px;
+
+    padding: 5px 7px;
+
+    border-radius: 6px;
+
+    border: 1px solid #3d4b68;
+
+    color: white;
+
+    background: #10182a;
+
+    box-shadow:
+
+        0 3px 0 #05070d;
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 11px;
+
+}
+
+
+/* =====================================================
+   BOTÓN REINICIAR
+===================================================== */
+
+.restart-button {
+
+    width: 100%;
+
+    padding: 14px 10px;
+
+    border-radius: 12px;
+
+    border: 2px solid var(--orange);
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(255, 123, 0, 0.2),
+            rgba(255, 25, 200, 0.12)
+        );
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+}
+
+
+.restart-button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+
+        0 0 25px rgba(255, 123, 0, 0.45);
+
+}
+
+
+.restart-icon {
+
+    margin-right: 5px;
+
+    font-size: 20px;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    margin-top: 25px;
+
+    text-align: center;
+
+    color: #78839d;
+
+    font-family: 'Orbitron', sans-serif;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+}
+
+
+footer strong {
+
+    color: white;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1050px) {
+
+    .game-interface {
+
+        grid-template-columns:
+            180px
+            minmax(350px, 1fr)
+            180px;
+
+        gap: 12px;
+
+    }
+
+    .cat-character {
+
+        display: none;
+
+    }
+
+}
+
+
+@media (max-width: 850px) {
+
+    .game-interface {
+
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+
+        margin: auto;
+
+    }
+
+    .left-panel {
+
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+
+    }
+
+    .left-panel .hud-box {
+
+        margin: 0;
+
+    }
+
+    .cat-card {
+
+        grid-column: 1 / -1;
+
+    }
+
+    .right-panel {
+
+        max-width: 400px;
+
+        width: 100%;
+
+        margin: auto;
+
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .game-wrapper {
+
+        width: 94%;
+
+        padding: 20px 0;
+
+    }
+
+    h1 {
+
+        font-size: 42px;
+
+    }
+
+    .subtitle {
+
+        font-size: 16px;
+
+    }
+
+    .left-panel {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .cat-card {
+
+        display: none;
+
+    }
+
+    .game-card {
+
+        padding: 10px;
+
+    }
+
+    .gamepad {
+
+        transform: scale(0.9);
+
+    }
+
 }

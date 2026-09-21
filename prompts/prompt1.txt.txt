@@ -1,0 +1,1 @@
+prompt1: Actúa como diseñador grafico, mejora la parte visual de este juego, modifica el html y css, no cambies los ids de los componentes, manten separado el css y el html.

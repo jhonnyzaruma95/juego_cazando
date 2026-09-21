@@ -1,32 +1,304 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Juego Cazando</title>
-  <link rel="stylesheet" href="cazando.css"/>
-  <script src="utilitarios.js"></script>
+<html lang="es">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Juego Cazando - Jhonny Zaruma</title>
+
+    <link rel="stylesheet" href="cazando.css">
+
+    <script src="utilitarios.js"></script>
 </head>
+
 <body onload="iniciarJuego()">
 
-  <h1>Juego Cazando</h1>
-  <p>Autor: Jhonny Zaruma </p>
-  <canvas id="areaJuego" width="500" height="500"></canvas>
-  <div class="controles">
-    <button onclick="moverArriba()">⬆ Arriba</button>
-    <button onclick="moverIzquierda()">⬅ Izquierda</button>
-    <button onclick="moverAbajo()">⬇ Abajo</button>
-    <button onclick="moverDerecha()">➡ Derecha</button>
-  </div>
+    <!-- Fondo oscuro -->
+    <div class="background-overlay"></div>
+
+    <main class="game-wrapper">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="game-header">
+
+            <div class="game-badge">
+                🐾 MODO CAZA
+            </div>
+
+            <h1>
+                JUEGO
+                <span>CAZANDO</span>
+            </h1>
+
+            <p class="subtitle">
+                🐱 Atrapa su comida antes de que se acabe el tiempo
+            </p>
+
+            <p class="author">
+                AUTOR:
+                <strong>Jhonny Zaruma</strong>
+            </p>
+
+        </header>
 
 
-  <div class="panel">
-    <span>Puntos: <span id="puntos">0</span></span>
-    <span>Tiempo: <span id="tiempo">10</span></span>
-  </div>
-    <button onclick="reiniciar()">REINICIAR</button>
+        <!-- ================= JUEGO ================= -->
+
+        <section class="game-interface">
 
 
-  <p id="mensaje"></p>
-  <script src="cazando.js"></script>
+            <!-- ================= PANEL IZQUIERDO ================= -->
+
+            <aside class="left-panel">
+
+                <div class="hud-box score-box">
+
+                    <div class="hud-icon">
+                        🐾
+                    </div>
+
+                    <div class="hud-info">
+                        <span>PUNTOS</span>
+
+                        <strong id="puntos">
+                            0
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="hud-box time-box">
+
+                    <div class="hud-icon">
+                        ⏱
+                    </div>
+
+                    <div class="hud-info">
+                        <span>TIEMPO</span>
+
+                        <strong>
+                            <span id="tiempo">10</span>
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Imagen del gato -->
+
+                <div class="cat-card">
+
+                    <img
+                        src="gato.jpg"
+                        alt="Gato cazador"
+                        class="cat-image"
+                    >
+
+                    <div class="cat-message">
+                        <span>🐱</span>
+
+                        <p>
+                            ¡Atrapa<br>
+                            tu comida!
+                        </p>
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+
+            <!-- ================= ÁREA CENTRAL ================= -->
+
+            <section class="game-area">
+
+                <div class="game-title">
+                    ZONA DE CAZA
+                </div>
+
+
+                <div class="canvas-container">
+
+                    <div class="scan-line"></div>
+
+                    <div class="corner corner-tl"></div>
+                    <div class="corner corner-tr"></div>
+                    <div class="corner corner-bl"></div>
+                    <div class="corner corner-br"></div>
+
+
+                    <!--
+                        IMPORTANTE:
+                        Se mantiene el ID original
+                    -->
+
+                    <canvas
+                        id="areaJuego"
+                        width="500"
+                        height="500">
+                    </canvas>
+
+
+                    <!-- Imagen decorativa del gato -->
+
+                    <div class="cat-character">
+
+                        <img
+                            src="gato.jpg"
+                            alt="Personaje gato"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- Mensaje del juego -->
+
+                <div class="game-message">
+
+                    <span>🐾</span>
+
+                    <p id="mensaje">
+                        ¡Atrapa a los ratones!
+                    </p>
+
+                    <span>🐾</span>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ================= CONTROLES ================= -->
+
+            <aside class="right-panel">
+
+                <div class="controls-header">
+
+                    <span>🎮</span>
+
+                    <h2>
+                        CONTROLES
+                    </h2>
+
+                </div>
+
+
+                <p class="controls-description">
+                    Mueve al gato para atrapar su comida
+                </p>
+
+
+                <!-- D-PAD -->
+
+                <div class="gamepad">
+
+                    <button
+                        class="control up"
+                        onclick="moverArriba()"
+                        aria-label="Mover arriba">
+                        ▲
+                    </button>
+
+
+                    <button
+                        class="control left"
+                        onclick="moverIzquierda()"
+                        aria-label="Mover izquierda">
+                        ◀
+                    </button>
+
+
+                    <button
+                        class="control center"
+                        disabled>
+                        🐾
+                    </button>
+
+
+                    <button
+                        class="control right"
+                        onclick="moverDerecha()"
+                        aria-label="Mover derecha">
+                        ▶
+                    </button>
+
+
+                    <button
+                        class="control down"
+                        onclick="moverAbajo()"
+                        aria-label="Mover abajo">
+                        ▼
+                    </button>
+
+                </div>
+
+
+                <div class="keyboard-help">
+
+                    <span>TECLADO</span>
+
+                    <div class="keys">
+
+                        <kbd>W</kbd>
+
+                        <kbd>A</kbd>
+
+                        <kbd>S</kbd>
+
+                        <kbd>D</kbd>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REINICIAR -->
+
+                <button
+                    class="restart-button"
+                    onclick="reiniciar()">
+
+                    <span class="restart-icon">
+                        ↻
+                    </span>
+
+                    REINICIAR
+
+                </button>
+
+            </aside>
+
+        </section>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer>
+
+            <span>🐱</span>
+
+            JUEGO CAZANDO
+
+            <span>•</span>
+
+            <strong>
+                Jhonny Zaruma
+            </strong>
+
+        </footer>
+
+    </main>
+
+
+    <script src="cazando.js"></script>
+
 </body>
+
 </html>

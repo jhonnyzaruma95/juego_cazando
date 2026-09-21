@@ -111,8 +111,8 @@ function detectarColision(){
 
 
 function aparecerComida(){
-    comidaY=generarAleatorio(0,canvas.width-ANCHO_COMIDA);
-    comidaX=0;
+    comidaX=generarAleatorio(0,canvas.width-ANCHO_COMIDA);
+    comidaY=generarAleatorio(0,canvas.height-ALTO_COMIDA);
     actualizarJuego();
 }
 
